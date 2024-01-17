@@ -215,6 +215,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 694635713}
+  - component: {fileID: 694635715}
+  - component: {fileID: 694635714}
   m_Layer: 0
   m_Name: Cart
   m_TagString: Untagged
@@ -238,6 +240,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &694635714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694635712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f709da1a3534ea64a850c407cb7de982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cart: {fileID: 694635715}
+--- !u!114 &694635715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694635712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f748e94bc428c4ab30f606a1ba0588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 20
+  vehicleWidth: 1.2
 --- !u!1 &1021969190
 GameObject:
   m_ObjectHideFlags: 0
