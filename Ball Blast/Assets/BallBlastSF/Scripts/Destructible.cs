@@ -6,17 +6,19 @@ using UnityEngine.Events;
 public class Destructible : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private int maxHitPoints;
+    public int maxHitPoints;
 
-    public UnityEvent Die;
+    [HideInInspector] public UnityEvent Die;
 
-    public UnityEvent ChangeHitPoints;
+    [HideInInspector] public UnityEvent ChangeHitPoints;
 
     private int hitPoints;
 
+    private bool isDie = false;
     private void Start()
     {
         hitPoints = maxHitPoints;
+        ChangeHitPoints.Invoke();
     }
     public void AplyDamage(int damage)
     {
@@ -31,8 +33,9 @@ public class Destructible : MonoBehaviour
     }
     public void Kill()
     {
+        if (isDie == true) return;
         hitPoints = 0;
-
+        isDie = true;
         ChangeHitPoints.Invoke();
 
         Die.Invoke();
