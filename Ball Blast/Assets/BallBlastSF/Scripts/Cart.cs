@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class Cart : MonoBehaviour
@@ -17,7 +18,7 @@ public class Cart : MonoBehaviour
     private float deltaMovement;
     private float lastPositionX;
 
-
+    [HideInInspector] public UnityEvent CollisionStone;
     private void Start()
     {
         movementTarget = transform.position; //ѕри старте целевва€ точка повозки = текущей позиции повозки, что бы избежать движени€ повозки в случае неиницилазированного movementTarget (0, 0, 0)
@@ -39,6 +40,15 @@ public class Cart : MonoBehaviour
         deltaMovement = transform.position.x - lastPositionX;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Stone stone = collision.transform.root.GetComponent<Stone>();
+
+        if (stone != null)
+        {
+            CollisionStone.Invoke();
+        }
+    }
     private void RotateWheel()
     {
         float angle = (180 * deltaMovement) / (Mathf.PI * wheelRadius * 2);

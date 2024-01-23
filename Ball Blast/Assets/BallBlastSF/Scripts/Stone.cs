@@ -15,11 +15,16 @@ public class Stone : Destructible
     }
     [SerializeField] private Size size;
     [SerializeField] private Stone stoneObject;
+
     [SerializeField] private float spawnUpForce;
+  
+  
     private StoneMovement movement;
     private void Awake()
     {
         movement = GetComponent<StoneMovement>();
+
+
 
         Die.AddListener(OnStoneDestroyed);
 
@@ -44,11 +49,17 @@ public class Stone : Destructible
     {
         for (int i = 0; i < 2; i++)
         {
+
+
+            
             Stone stone = Instantiate(stoneObject, transform.position, Quaternion.identity);
             stone.SetSize(size - 1);
             stone.maxHitPoints = Mathf.Clamp(maxHitPoints / 2, 1, maxHitPoints);
             stone.movement.AddVerticalVelocity(spawnUpForce);
             stone.movement.SetHorizontalDirection((i % 2 * 2) - 1);
+           
+
+
         }
     }
     public void SetSize(Size size)
@@ -68,6 +79,6 @@ public class Stone : Destructible
     }
 
     
-
+   
 
 }

@@ -223,14 +223,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11832563cebe8346a4ec37e4b3e2f41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stonePrefab: {fileID: 0}
+  stonePrefab: {fileID: 2390041163665264538, guid: 35e4b8aa5a6d7db48bae4c8e0daf1dba, type: 3}
   spawnPoints:
   - {fileID: 372874390}
   - {fileID: 1789211880}
   - {fileID: 809955197}
   - {fileID: 1956366281}
-  spawnRate: 3
-  amount: 6
+  spawnRate: 2
+  colorsStone:
+  - {r: 0.8301887, g: 0.20754717, b: 0.20754717, a: 1}
+  - {r: 0.83137256, g: 0.5989044, b: 0.20784314, a: 1}
+  - {r: 0.7764311, g: 0.83137256, b: 0.20784314, a: 1}
+  - {r: 0.49877644, g: 0.83137256, b: 0.20784314, a: 1}
+  - {r: 0.20784314, g: 0.83137256, b: 0.3056823, a: 1}
+  - {r: 0.20784314, g: 0.83137256, b: 0.74648446, a: 1}
+  - {r: 0.20784314, g: 0.28326955, b: 0.83137256, a: 1}
+  - {r: 0.5715753, g: 0.20784314, b: 0.83137256, a: 1}
+  - {r: 0.83137256, g: 0.20784314, b: 0.6735879, a: 1}
+  turret: {fileID: 694635717}
+  minHitPointsPercentage: 0.8
+  maxHitPointsRate: 1
+  amount: 5
+  Completed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &293075044
 Transform:
   m_ObjectHideFlags: 0
@@ -372,6 +388,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7624335286012761073, guid: 9f1586738b9ac0e428b035158e8de4b2, type: 3}
   m_PrefabInstance: {fileID: 7624335286664896304}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &694635714 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7624335286012761074, guid: 9f1586738b9ac0e428b035158e8de4b2, type: 3}
+  m_PrefabInstance: {fileID: 7624335286664896304}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694635712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f709da1a3534ea64a850c407cb7de982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &694635715 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7624335286012761075, guid: 9f1586738b9ac0e428b035158e8de4b2, type: 3}
+  m_PrefabInstance: {fileID: 7624335286664896304}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694635712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f748e94bc428c4ab30f606a1ba0588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &694635717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,8 +425,9 @@ MonoBehaviour:
   projectilePrefab: {fileID: 2826767218893724034, guid: a795abc6f4a63a94481f5cc34321edae, type: 3}
   shootPoint: {fileID: 916170594}
   fireRate: 0.3
-  projectileAmount: 1
+  projectileAmount: 5
   projectileInterval: 0.2
+  damage: 10
 --- !u!1 &809955196
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +615,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: c90bf0ca7ba5740429785028d0b5f096, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -611,6 +650,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652492926}
+  - component: {fileID: 1652492927}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -636,6 +676,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1652492927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652492925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d7c1cffa9e3ffd4b8df0f004b440139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawner: {fileID: 293075043}
+  cart: {fileID: 694635715}
+  Passed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 694635714}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  Defeat:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 694635714}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1681709890
 GameObject:
   m_ObjectHideFlags: 0
