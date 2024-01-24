@@ -4,8 +4,16 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
+public enum cartType
+{
+    palyer
+}
+
+
 public class Cart : MonoBehaviour
 {
+    private cartType type = cartType.palyer;
+
     [Header("Movement")]
     [SerializeField] private float movementSpeed;
     [SerializeField] private float vehicleWidth;

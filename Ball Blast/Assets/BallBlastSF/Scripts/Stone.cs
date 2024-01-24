@@ -15,7 +15,7 @@ public class Stone : Destructible
     }
     [SerializeField] private Size size;
     [SerializeField] private Stone stoneObject;
-
+    [SerializeField] private Money moneyPrefab;
     [SerializeField] private float spawnUpForce;
   
   
@@ -37,14 +37,22 @@ public class Stone : Destructible
     }
     private void OnStoneDestroyed()
     {
+        int randomSpawn = Random.Range(0, 4);
         if (size != Size.Small)
         {
             SpawnStones();
         }
+        if (randomSpawn == 1)
+        {
+            SpawnMoney();
+        }
         Destroy(gameObject);
 
     }
-
+    private void SpawnMoney()
+    {
+        Money money = Instantiate(moneyPrefab, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity); 
+    }
     private void SpawnStones()
     {
         for (int i = 0; i < 2; i++)

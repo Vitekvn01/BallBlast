@@ -212,6 +212,7 @@ MonoBehaviour:
       m_Calls: []
   size: 3
   stoneObject: {fileID: 2390041163665264538}
+  moneyPrefab: {fileID: 393666495, guid: 9a2f2e8de865e0145a116be5196934ad, type: 3}
   spawnUpForce: 1
 --- !u!114 &6200199372180439426
 MonoBehaviour:

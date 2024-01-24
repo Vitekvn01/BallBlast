@@ -159,3 +159,4 @@ Received Import Request.
   path: Assets/BallBlastSF/Prefabs/Stone.prefab
   artifactKey: Guid(35e4b8aa5a6d7db48bae4c8e0daf1dba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/BallBlastSF/Prefabs/Stone.prefab using Guid(35e4b8aa5a6d7db48bae4c8e0daf1dba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9662377240d37fbbd9cfb188346a3a69') in 0.296340 seconds 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
