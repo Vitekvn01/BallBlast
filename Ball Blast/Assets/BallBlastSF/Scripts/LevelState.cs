@@ -2,22 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class LevelState : MonoBehaviour
 {
 
     [SerializeField] private StoneSpawner spawner;
     [SerializeField] private Cart cart;
+    [SerializeField] private GameObject defeatPanel;
+    [SerializeField] private GameObject passedPanel;
+    [SerializeField] private GameObject startPanel;
 
     [Space(5)]
     public UnityEvent Passed;
     public UnityEvent Defeat;
+    public UnityEvent Start;
+
+    private static int level = 1;
+
+    public static int Level => level;
 
     private float timer;
     private bool checkPassed;
     private bool isPassed = false;
+    private static bool isStart = false;
+
+    public static bool IsStart => isStart;
     private void Awake()
     {
+        Load();
         spawner.Completed.AddListener(OnSpawnCompleted);
         cart.CollisionStone.AddListener(OnCartCollisionStone);
     }
@@ -31,11 +45,14 @@ public class LevelState : MonoBehaviour
     private void OnCartCollisionStone()
     {
         Defeat.Invoke();
+        defeatPanel.SetActive(true);
+        isStart = false;
     }
     private void OnSpawnCompleted()
     {
         checkPassed = true;
     }
+
 
     private void Update()
     {
@@ -51,7 +68,10 @@ public class LevelState : MonoBehaviour
                 {
                     Passed.Invoke();
                     isPassed = true;
-
+                    passedPanel.SetActive(true);
+                    level++;
+                    Save();
+                    isStart = false;
                 }
             }
 
@@ -59,5 +79,28 @@ public class LevelState : MonoBehaviour
         }
     }
 
+    public void onStart()
+    {
+        isStart = true;
+        startPanel.SetActive(false);
+    }
 
+    private void Save()
+    {
+        PlayerPrefs.SetInt("level", level);
+    }
+    private void Load()
+    {
+        level = PlayerPrefs.GetInt("level", 1);
+    }
+
+    private void Reset()
+    {
+        PlayerPrefs.DeleteKey("level");
+
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }
+
+

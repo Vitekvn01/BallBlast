@@ -20,7 +20,6 @@ public class MoneyUI : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
 

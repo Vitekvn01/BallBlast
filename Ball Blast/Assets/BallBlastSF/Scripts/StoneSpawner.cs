@@ -18,9 +18,7 @@ public class StoneSpawner : MonoBehaviour
     [SerializeField] private Turret turret;
     [SerializeField][Range(0.0f, 1.0f)] private float minHitPointsPercentage;
     [SerializeField] private float maxHitPointsRate;
-    
     [SerializeField] private int amount;
-
     [Space(10)] public UnityEvent Completed;
 
     private int stoneMaxHitPoints;
@@ -32,31 +30,32 @@ public class StoneSpawner : MonoBehaviour
     private void Start()
     {
         int damagePerSecond = (int)((turret.Damage * turret.ProjectileAmount) * (1 / turret.FireRate));
-
         stoneMaxHitPoints = (int)(damagePerSecond * maxHitPointsRate);
         stoneMinHitPoints = (int)(stoneMaxHitPoints * minHitPointsPercentage);
         timer = spawnRate;
+        amount += LevelState.Level;
     }
 
 
     private void Update()
     {
-        timer += Time.deltaTime;
-
-        if (timer >= spawnRate)
+        if (LevelState.IsStart == true)
         {
-            Spawn();
+            timer += Time.deltaTime;
 
-            timer = 0;
+            if (timer >= spawnRate)
+            {
+                Spawn();
+
+                timer = 0;
+            }
+            if (amountSpawned == amount)
+            {
+                enabled = false;
+
+                Completed.Invoke();
+            }
         }
-        if (amountSpawned == amount)
-        {
-            enabled = false;
-
-            Completed.Invoke();
-        }
-
-
     }
     private void Spawn()
     {

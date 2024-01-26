@@ -9,11 +9,15 @@ public class CartInputConrol : MonoBehaviour
     
     private void Update()
     {
-        cart.SetMovementTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-
-        if (Input.GetMouseButton(0) == true)
+        if (LevelState.IsStart == true)
         {
-            turret.Fire();
+            cart.SetMovementTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+            if (Input.GetMouseButton(0) == true)
+            {
+                turret.Fire();
+            }
         }
+  
     }
 }

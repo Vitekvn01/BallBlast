@@ -24,8 +24,6 @@ public class Stone : Destructible
     {
         movement = GetComponent<StoneMovement>();
 
-
-
         Die.AddListener(OnStoneDestroyed);
 
         SetSize(size);
