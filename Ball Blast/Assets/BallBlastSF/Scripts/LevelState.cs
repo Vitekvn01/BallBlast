@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 
 public class LevelState : MonoBehaviour
 {
-
     [SerializeField] private StoneSpawner spawner;
     [SerializeField] private Cart cart;
     [SerializeField] private GameObject defeatPanel;
@@ -35,7 +34,6 @@ public class LevelState : MonoBehaviour
         spawner.Completed.AddListener(OnSpawnCompleted);
         cart.CollisionStone.AddListener(OnCartCollisionStone);
     }
-
     private void OnDestroy()
     {
         spawner.Completed.RemoveListener(OnSpawnCompleted);
@@ -56,6 +54,12 @@ public class LevelState : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR
+        if (Input.GetKeyUp(KeyCode.F1) == true)
+        {
+            Reset();
+        }
+#endif
         if (isPassed == true) return;
 
         timer += Time.deltaTime;
@@ -64,12 +68,13 @@ public class LevelState : MonoBehaviour
         {
             if (checkPassed == true)
             {
-                if (FindObjectsOfType<Stone>().Length == 0)
+                if (FindObjectsOfType<Stone>().Length == 0 && isPassed == false)
                 {
                     Passed.Invoke();
                     isPassed = true;
                     passedPanel.SetActive(true);
                     level++;
+                    Debug.Log("уровень " + level);
                     Save();
                     isStart = false;
                 }

@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 
 public class StoneSpawner : MonoBehaviour
 {
-    
+
 
     [Header("Spawn")]
     [SerializeField] private Stone stonePrefab;
@@ -27,13 +27,21 @@ public class StoneSpawner : MonoBehaviour
     private float timer;
     private float amountSpawned;
 
+    private int stepStoneAmount;
+    public int StepStoneAmount => stepStoneAmount;
+
+    private void Awake()
+    {
+        amount += LevelState.Level;
+        Debug.Log("спавн" + amount);
+    }
     private void Start()
     {
         int damagePerSecond = (int)((turret.Damage * turret.ProjectileAmount) * (1 / turret.FireRate));
         stoneMaxHitPoints = (int)(damagePerSecond * maxHitPointsRate);
         stoneMinHitPoints = (int)(stoneMaxHitPoints * minHitPointsPercentage);
         timer = spawnRate;
-        amount += LevelState.Level;
+
     }
 
 
@@ -59,12 +67,23 @@ public class StoneSpawner : MonoBehaviour
     }
     private void Spawn()
     {
-        
+        int randomSize = Random.Range(1, 4);
         Stone stone = Instantiate(stonePrefab, spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity);
-        stone.SetSize((Stone.Size)Random.Range(1, 4));
+        stone.SetSize((Stone.Size)randomSize);
+        amountSize(randomSize);
         stone.maxHitPoints = Random.Range(stoneMinHitPoints, stoneMaxHitPoints + 1);
         Material stoneMaterial = stone.GetComponentInChildren<Renderer>().material;
         stoneMaterial.color = colorsStone[Random.Range(0, colorsStone.Length)];
         amountSpawned++;
     }
+
+    private void amountSize(int randomSize)
+    {
+        
+        if (randomSize == 1) stepStoneAmount += 3;
+        if (randomSize == 2) stepStoneAmount += 7;
+        if (randomSize == 3) stepStoneAmount += 15;
+        Debug.Log("делений " + stepStoneAmount);
+    }
+
 }

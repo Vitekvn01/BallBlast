@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(StoneMovement))]
 public class Stone : Destructible
@@ -17,11 +18,14 @@ public class Stone : Destructible
     [SerializeField] private Stone stoneObject;
     [SerializeField] private Money moneyPrefab;
     [SerializeField] private float spawnUpForce;
-  
-  
+    private UILevelProgress UIlevelProgress;
+
+    public UnityEvent StoneDestroy;
     private StoneMovement movement;
     private void Awake()
     {
+        UIlevelProgress = FindObjectOfType<UILevelProgress>();
+
         movement = GetComponent<StoneMovement>();
 
         Die.AddListener(OnStoneDestroyed);
@@ -39,12 +43,21 @@ public class Stone : Destructible
         if (size != Size.Small)
         {
             SpawnStones();
+
+            UIlevelProgress.AddFillAmount();
+
         }
+        else
+        {
+            UIlevelProgress.AddFillAmount();
+        }
+
         if (randomSpawn == 1)
         {
             SpawnMoney();
         }
         Destroy(gameObject);
+        
 
     }
     private void SpawnMoney()
