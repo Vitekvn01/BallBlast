@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
+using UnityEngine.UIElements;
 
 public class Turret : MonoBehaviour
 {
@@ -17,6 +19,10 @@ public class Turret : MonoBehaviour
 
     private float timer;
 
+    private void Awake()
+    {
+        Load();
+    }
     private void Update()
     {
         timer += Time.deltaTime;
@@ -34,8 +40,6 @@ public class Turret : MonoBehaviour
 
 
     }
-
-
     public void Fire()
     {
         if (timer >= fireRate)
@@ -45,4 +49,26 @@ public class Turret : MonoBehaviour
             timer = 0;
         }
     }
+
+    public void AddDamage(int amount)
+    {
+        damage += amount;
+    }
+    public void AddFireRate(float amount)
+    {
+        fireRate -= amount;
+    }
+
+    public void AddProjectileAmount(int amount)
+    {
+        projectileAmount += amount;
+    }
+
+    private void Load()
+    {
+        fireRate = PlayerPrefs.GetFloat("fireRate", 1);
+        damage = PlayerPrefs.GetInt("damage", 1);
+        projectileAmount = PlayerPrefs.GetInt("projectileAmount", 1);
+    }
 }
+

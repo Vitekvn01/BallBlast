@@ -11,7 +11,7 @@ public class Money : MonoBehaviour
     {
         if (collision.transform.root.GetComponent<Cart>() != null)
         {
-            MoneyUI.Instance.UpdateMoneyAmount(1);
+            MoneyUI.Instance.AddMoneyAmount(1);
             Destroy(gameObject);
         }
     }

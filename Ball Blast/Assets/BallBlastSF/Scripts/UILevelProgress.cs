@@ -17,8 +17,8 @@ public class UILevelProgress : MonoBehaviour
 
     private void Start()
     {
-        currentLevelText.text = LevelState.Level.ToString();
-        nextLevelText.text = (LevelState.Level + 1).ToString();
+        currentLevelText.text = levelState.Level.ToString();
+        nextLevelText.text = (levelState.Level + 1).ToString();
         fill.fillAmount = 0;
 
         

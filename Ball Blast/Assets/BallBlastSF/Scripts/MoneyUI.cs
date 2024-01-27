@@ -14,10 +14,10 @@ public class MoneyUI : MonoBehaviour
 
     private int moneyAmount = 0;
 
+    public int MoneyAmount => moneyAmount;
     private void Awake()
     {
         Load();
-        levelState.Passed.AddListener(Save);
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -34,18 +34,26 @@ public class MoneyUI : MonoBehaviour
 
     }
 
-
-    public void UpdateMoneyAmount(int amount)
+    private void Update()
+    {
+        if (moneyAmount < 0)
+        {
+            moneyAmount = 0;
+        }
+        textMoney.text = "Money: " + moneyAmount.ToString();
+    }
+    public void AddMoneyAmount(int amount)
     {
         moneyAmount += amount;
         textMoney.text = "Money: " + moneyAmount.ToString();
     }
 
-
-    private void Save()
+    public void RemoveMoneyAmount(int amount)
     {
-        PlayerPrefs.SetInt("moneyAmount", moneyAmount);
+        moneyAmount -= amount;
+        textMoney.text = "Money: " + moneyAmount.ToString();
     }
+
 
     private void Load()
     {

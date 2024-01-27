@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 
 public class StoneSpawner : MonoBehaviour
 {
-
+    [SerializeField] private LevelState levelState;
 
     [Header("Spawn")]
     [SerializeField] private Stone stonePrefab;
@@ -29,25 +29,20 @@ public class StoneSpawner : MonoBehaviour
 
     private int stepStoneAmount;
     public int StepStoneAmount => stepStoneAmount;
-
-    private void Awake()
-    {
-        amount += LevelState.Level;
-        Debug.Log("спавн" + amount);
-    }
     private void Start()
     {
+        amount += levelState.Level;
         int damagePerSecond = (int)((turret.Damage * turret.ProjectileAmount) * (1 / turret.FireRate));
         stoneMaxHitPoints = (int)(damagePerSecond * maxHitPointsRate);
         stoneMinHitPoints = (int)(stoneMaxHitPoints * minHitPointsPercentage);
         timer = spawnRate;
-
+        Debug.Log("спавн" + amount);
     }
 
 
     private void Update()
     {
-        if (LevelState.IsStart == true)
+        if (levelState.IsStart == true)
         {
             timer += Time.deltaTime;
 

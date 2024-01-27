@@ -12,22 +12,23 @@ public class LevelState : MonoBehaviour
     [SerializeField] private GameObject defeatPanel;
     [SerializeField] private GameObject passedPanel;
     [SerializeField] private GameObject startPanel;
-
+    [SerializeField] private GameObject upgradePanel;
+    [SerializeField] private SaveProgress saveProgress;
     [Space(5)]
     public UnityEvent Passed;
     public UnityEvent Defeat;
     public UnityEvent Start;
 
-    private static int level = 1;
+    private int level = 1;
 
-    public static int Level => level;
+    public int Level => level;
 
     private float timer;
     private bool checkPassed;
     private bool isPassed = false;
-    private static bool isStart = false;
+    private bool isStart = false;
 
-    public static bool IsStart => isStart;
+    public bool IsStart => isStart;
     private void Awake()
     {
         Load();
@@ -44,6 +45,7 @@ public class LevelState : MonoBehaviour
     {
         Defeat.Invoke();
         defeatPanel.SetActive(true);
+        upgradePanel.SetActive(true);
         isStart = false;
     }
     private void OnSpawnCompleted()
@@ -57,7 +59,7 @@ public class LevelState : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetKeyUp(KeyCode.F1) == true)
         {
-            Reset();
+            saveProgress.Reset();
         }
 #endif
         if (isPassed == true) return;
@@ -73,9 +75,10 @@ public class LevelState : MonoBehaviour
                     Passed.Invoke();
                     isPassed = true;
                     passedPanel.SetActive(true);
+                    upgradePanel.SetActive(true);
                     level++;
                     Debug.Log("уровень " + level);
-                    Save();
+                    saveProgress.Save();
                     isStart = false;
                 }
             }
@@ -88,24 +91,16 @@ public class LevelState : MonoBehaviour
     {
         isStart = true;
         startPanel.SetActive(false);
+        upgradePanel.SetActive(false);
     }
 
-    private void Save()
-    {
-        PlayerPrefs.SetInt("level", level);
-    }
+   
     private void Load()
     {
         level = PlayerPrefs.GetInt("level", 1);
     }
 
-    private void Reset()
-    {
-        PlayerPrefs.DeleteKey("level");
-
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    
 }
 
 
