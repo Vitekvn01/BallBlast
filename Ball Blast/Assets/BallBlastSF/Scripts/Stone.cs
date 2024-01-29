@@ -19,7 +19,6 @@ public class Stone : Destructible
     [SerializeField] private Money moneyPrefab;
     [SerializeField] private float spawnUpForce;
     private UILevelProgress UIlevelProgress;
-
     public UnityEvent StoneDestroy;
     private StoneMovement movement;
     private void Awake()
@@ -32,14 +31,15 @@ public class Stone : Destructible
 
         SetSize(size);
     }
-
+   
     private void OnDestroy()
     {
         Die.RemoveListener(OnStoneDestroyed);
     }
     private void OnStoneDestroyed()
     {
-        int randomSpawn = Random.Range(0, 4);
+        int randomBonus = Random.Range(1, 5);
+        int randomSpawnMoney = Random.Range(1, 5); 
         if (size != Size.Small)
         {
             SpawnStones();
@@ -52,13 +52,27 @@ public class Stone : Destructible
             UIlevelProgress.AddFillAmount();
         }
 
-        if (randomSpawn == 1)
+        if (randomSpawnMoney == 1)
         {
             SpawnMoney();
         }
-        Destroy(gameObject);
-        
+        if (randomBonus == 1)
+        {
+            int random = Random.Range(1, 3);
+            if (random == 1)
+            {
+                BonusTimer.FreezingBonusTrue();
 
+                Debug.Log("Заморозка");
+            }
+            if (random == 2)
+            {
+                BonusTimer.BonusInvulnerabilityTrue();
+                Debug.Log("Неуязвисмость");
+            }
+
+        }
+        Destroy(gameObject);
     }
     private void SpawnMoney()
     {

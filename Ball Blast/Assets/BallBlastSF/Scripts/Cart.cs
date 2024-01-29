@@ -26,6 +26,9 @@ public class Cart : MonoBehaviour
     private float deltaMovement;
     private float lastPositionX;
 
+
+    private bool Invulnerability = false;
+
     [HideInInspector] public UnityEvent CollisionStone;
     private void Start()
     {
@@ -52,7 +55,7 @@ public class Cart : MonoBehaviour
     {
         Stone stone = collision.transform.root.GetComponent<Stone>();
 
-        if (stone != null)
+        if (stone != null && Invulnerability == false)
         {
             CollisionStone.Invoke();
         }
@@ -73,17 +76,27 @@ public class Cart : MonoBehaviour
 
     private Vector3 ClampMovementTarget(Vector3 target)
     {
-        float leftBorder =  LevelBoundary.Instance.LeftBorder + vehicleWidth * 0.5f;
+        float leftBorder = LevelBoundary.Instance.LeftBorder + vehicleWidth * 0.5f;
         float rightBorder = LevelBoundary.Instance.RightBorder - vehicleWidth * 0.5f;
 
         Vector3 moveTarget = target;
         moveTarget.z = transform.position.z;
         moveTarget.y = transform.position.y;
 
-        if(moveTarget.x < leftBorder) moveTarget.x = leftBorder;
+        if (moveTarget.x < leftBorder) moveTarget.x = leftBorder;
         if (moveTarget.x > rightBorder) moveTarget.x = rightBorder;
 
         return moveTarget;
+    }
+
+    public void bonusInvulnerabilityStart()
+    {
+        Invulnerability = true;
+    }
+
+    public void bonusInvulnerabilityStop()
+    {
+        Invulnerability = false;
     }
 
 #if UNITY_EDITOR
