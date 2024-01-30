@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(StoneMovement))]
 public class Stone : Destructible
@@ -80,19 +81,16 @@ public class Stone : Destructible
     }
     private void SpawnStones()
     {
+        float axisZ = 0;
         for (int i = 0; i < 2; i++)
         {
-
-
-            
-            Stone stone = Instantiate(stoneObject, transform.position, Quaternion.identity);
+            axisZ -= 0.001f;
+            Stone stone = Instantiate(stoneObject, new Vector3(transform.position.x, transform.position.y, transform.position.z - axisZ), Quaternion.identity);
             stone.SetSize(size - 1);
             stone.maxHitPoints = Mathf.Clamp(maxHitPoints / 2, 1, maxHitPoints);
             stone.movement.AddVerticalVelocity(spawnUpForce);
             stone.movement.SetHorizontalDirection((i % 2 * 2) - 1);
-           
-
-
+            
         }
     }
     public void SetSize(Size size)

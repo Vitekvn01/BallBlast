@@ -34,13 +34,13 @@ public class BonusTimer : MonoBehaviour
                 bonusFreezingPanel.SetActive(true);
                 movement.FreezingStart();
                 timerBonus -= Time.deltaTime;
-                Debug.Log("Замороска актив" + timerBonus);
+                /*Debug.Log("Замороска актив" + timerBonus);*/
                 freezingText.text = "Заморозка: " + ((int)timerBonus).ToString();
 
                 if (timerBonus <= 0)
                 {
                     bonusFreezingPanel.SetActive(false);
-                    Debug.Log("Замороска ДЕактив");
+                    /*Debug.Log("Замороска ДЕактив");*/
                     movement.FreezingStop();
                     bonusFreezing = false;
                     timerBonus = 5;
@@ -51,13 +51,13 @@ public class BonusTimer : MonoBehaviour
                 BonusInvulnerabilityPanel.SetActive(true);
                 cart.bonusInvulnerabilityStart();
                 timerBonus -= Time.deltaTime;
-                Debug.Log("Неуязвисмость актив" + timerBonus);
+                /*Debug.Log("Неуязвисмость актив" + timerBonus);*/
                 InvulnerabilityText.text = "Неуязвимость: " + ((int)timerBonus).ToString();
 
                 if (timerBonus <= 0)
                 {
                     BonusInvulnerabilityPanel.SetActive(false);
-                    Debug.Log("Неуязвисмость ДЕактив");
+                    /*Debug.Log("Неуязвисмость ДЕактив");*/
                     cart.bonusInvulnerabilityStop();
                     bonusInvulnerability = false;
                     timerBonus = 5;

@@ -84,6 +84,7 @@ public class LevelState : MonoBehaviour
             }
 
             timer = 0;
+
         }
     }
 

@@ -28,7 +28,7 @@ public class UILevelProgress : MonoBehaviour
     public void AddFillAmount()
     {
         fillAmountStep = 1.0f / (float)stoneSpawner.StepStoneAmount;
-        Debug.Log("шаг " + fillAmountStep);
+        /*Debug.Log("шаг " + fillAmountStep);*/
         fill.fillAmount += fillAmountStep;
         
     }

@@ -4,15 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
-public enum cartType
-{
-    palyer
-}
 
 
 public class Cart : MonoBehaviour
 {
-    private cartType type = cartType.palyer;
 
     [Header("Movement")]
     [SerializeField] private float movementSpeed;
@@ -26,7 +21,6 @@ public class Cart : MonoBehaviour
     private float deltaMovement;
     private float lastPositionX;
 
-
     private bool Invulnerability = false;
 
     [HideInInspector] public UnityEvent CollisionStone;
@@ -34,14 +28,12 @@ public class Cart : MonoBehaviour
     {
         movementTarget = transform.position; //ѕри старте целевва€ точка повозки = текущей позиции повозки, что бы избежать движени€ повозки в случае неиницилазированного movementTarget (0, 0, 0)
     }
-
     private void Update()
     {
         Move();
 
         RotateWheel();
     }
-
     private void Move()
     {
         lastPositionX = transform.position.x;
@@ -50,7 +42,6 @@ public class Cart : MonoBehaviour
 
         deltaMovement = transform.position.x - lastPositionX;
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Stone stone = collision.transform.root.GetComponent<Stone>();
@@ -88,12 +79,10 @@ public class Cart : MonoBehaviour
 
         return moveTarget;
     }
-
     public void bonusInvulnerabilityStart()
     {
         Invulnerability = true;
     }
-
     public void bonusInvulnerabilityStop()
     {
         Invulnerability = false;
