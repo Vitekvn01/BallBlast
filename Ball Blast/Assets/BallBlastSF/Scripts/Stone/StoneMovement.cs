@@ -12,18 +12,12 @@ public class StoneMovement : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float gravitiOffSet;
 
-    private float horizontalSpeedSave;
-    private float gravitySave;
-    private float reboundSpeedSave;
-    private float rotationSpeedSave;
-
     private static bool UseGravity = true;
     
     
     private void Awake()
     {
         velocity.x = -Mathf.Sign(transform.position.x) * horizontalSpeed;
-
     }
     private void Update()
     {
@@ -47,7 +41,6 @@ public class StoneMovement : MonoBehaviour
             velocity.x = Mathf.Sign(velocity.x) * horizontalSpeed;
             transform.position += velocity * Time.deltaTime;
         }
-
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -79,33 +72,12 @@ public class StoneMovement : MonoBehaviour
    
     public void FreezingStart()
     {
-
         UseGravity = false;
-        /*horizontalSpeedSave = horizontalSpeed;
-        gravitySave = gravity;
-        reboundSpeedSave = redoundSpeed;
-        rotationSpeedSave = rotationSpeed;
-
-        
-
-        timerBonus = 0;
-        horizontalSpeed = 0;
-        gravity = 0;
-        redoundSpeed = 0;
-        rotationSpeed = 0;*/
-
     }
 
     public void FreezingStop()
     {
-
         UseGravity = true;
-        /* horizontalSpeed = horizontalSpeedSave;
-         gravity = gravitySave;
-         redoundSpeed = reboundSpeedSave;
-         rotationSpeed = rotationSpeedSave;*/
-
-
     }
 
 }

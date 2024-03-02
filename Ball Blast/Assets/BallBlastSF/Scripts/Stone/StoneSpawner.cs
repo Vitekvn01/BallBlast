@@ -37,10 +37,7 @@ public class StoneSpawner : MonoBehaviour
     private int ñounter = 0;
 
     private float axisZStone = 0;
-    private void Awake()
-    {
-        
-    }
+
     private void Start()
     {
         GenerateSize(levelState.Level);

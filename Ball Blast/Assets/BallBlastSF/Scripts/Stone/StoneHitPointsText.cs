@@ -31,8 +31,5 @@ public class StoneHitPointsText : MonoBehaviour
         {
             hitPointText.text = hitPoints.ToString();
         }
-
-
-
     }
 }

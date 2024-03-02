@@ -44,9 +44,7 @@ public class Stone : Destructible
         if (size != Size.Small)
         {
             SpawnStones();
-
             UIlevelProgress.AddFillAmount();
-
         }
         else
         {
@@ -63,7 +61,6 @@ public class Stone : Destructible
             if (random == 1)
             {
                 BonusTimer.FreezingBonusTrue();
-
                 Debug.Log("Заморозка");
             }
             if (random == 2)
@@ -105,7 +102,6 @@ public class Stone : Destructible
         if (size == Size.Big) return new Vector3(0.75f, 0.75f, 0.75f);
         if (size == Size.Normal) return new Vector3(0.6f, 0.6f, 0.6f);
         if (size == Size.Small) return new Vector3(0.4f, 0.4f, 0.4f);
-
         return Vector3.one;
     }
 

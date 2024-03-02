@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Money : MonoBehaviour
 {
-   
-
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.root.GetComponent<Cart>() != null)

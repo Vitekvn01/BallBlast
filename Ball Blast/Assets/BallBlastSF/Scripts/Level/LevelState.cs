@@ -53,7 +53,6 @@ public class LevelState : MonoBehaviour
         checkPassed = true;
     }
 
-
     private void Update()
     {
 #if UNITY_EDITOR
